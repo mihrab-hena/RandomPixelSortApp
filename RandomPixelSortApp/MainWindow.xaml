@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RandomPixelSortApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Pixels Sort UI" Height="400" Width="525">
+    <Border Padding="15">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="RandomColorButton" Margin="30 0 30 0" Grid.Column="0" Content="Random Color" Click="RandomColorButton_Click"/>
+                <Button x:Name="ColorSortingButton" Margin="30 0 30 0" Grid.Column="1" Content="Color Sorting" Click="ColorSortingButton_Click"/>
+            </Grid>
+            <StackPanel Margin="5 15 5 5">
+                <Border BorderThickness=".5" BorderBrush="Black" Background="LightGray" Height="300" Width="400">
+                    <Image 
+                        Name="ImageViewer"
+                        Height="300"
+                        Width="400"
+                    />
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+    </Border>
+    
 </Window>
