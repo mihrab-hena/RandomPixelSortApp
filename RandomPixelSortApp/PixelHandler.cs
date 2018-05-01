@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Drawing;
 using System.Text;
@@ -9,9 +10,9 @@ namespace RandomPixelSortApp
 {
     public class PixelHandler
     {
-        //heightOfImage and widthOfImage should be in pixels
-        public const int heightOfImage = 300;
-        public const int widthOfImage = 400;
+        //heightOfImage and widthOfImage should be in pixels        
+        public readonly int heightOfImage = Int32.Parse(ConfigurationManager.AppSettings["ImageHeight"]);         
+        public readonly int widthOfImage = Int32.Parse(ConfigurationManager.AppSettings["ImageWidth"]);
 
         public int HeightOfImage
         {

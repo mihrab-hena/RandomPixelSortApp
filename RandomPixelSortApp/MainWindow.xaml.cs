@@ -32,17 +32,37 @@ namespace RandomPixelSortApp
         }
 
         private void RandomColorButton_Click(object sender, RoutedEventArgs e)
-        {                        
-            listOfRandomPixels = pixelHandler.GenerateRandomPixels();
-            ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);                        
-            ImageViewer.Source = imageHandler.MakeImage(listOfRandomPixels);
+        {
+            try
+            {
+                listOfRandomPixels = pixelHandler.GenerateRandomPixels();
+                ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
+                ImageViewer.Source = imageHandler.MakeImage(listOfRandomPixels);
+            }
+            catch (ArgumentException argumentException)
+            {
+                MessageBox.Show("Invalid A/R/G/B values \n Details:" + argumentException.Message);
+                
+            }
+            catch (Exception exceptionObj)
+            {
+                Console.WriteLine("Error Occured. \n Details:" + exceptionObj.Message);
+            }
+      
         }
 
         private void ColorSortingButton_Click(object sender, RoutedEventArgs e)
-        {            
-            listOfSortedPixelsByHue = pixelHandler.SortPixelsByHue(listOfRandomPixels);
-            ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
-            this.ImageViewer.Source = imageHandler.MakeImage(listOfSortedPixelsByHue);
+        {
+            try
+            {
+                listOfSortedPixelsByHue = pixelHandler.SortPixelsByHue(listOfRandomPixels);
+                ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
+                ImageViewer.Source = imageHandler.MakeImage(listOfSortedPixelsByHue);
+            }
+            catch (Exception exceptionObj)
+            {
+                Console.WriteLine("Error Occured. \n Details:" + exceptionObj.Message);
+            }            
         }
     }
 }
