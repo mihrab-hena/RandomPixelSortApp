@@ -19,35 +19,43 @@ namespace RandomPixelSortApp
         {
             this.heightOfImage = heightOfImage;
             this.widthOfImage = widthOfImage;
-        }        
+        }
 
         /// <summary>
         /// Fills the area of Image with given pixels for predefined height and width of the Image
         /// </summary>
-        /// <param name="dictionaryPixels"></param>
-        /// <returns>BitmapImage as Image</returns>
-        public BitmapImage MakeImage(Dictionary<int, Color> dictionaryPixels)
+        /// <param name="listOfPixels"></param>        
+        public BitmapImage MakeImage(List<Color> listOfPixels)
         {
             int x = 0;
             int y = 0;
             Bitmap bitmap = new Bitmap(widthOfImage, heightOfImage);
-            foreach (var pixel in dictionaryPixels)
+
+            /* x stands for the width of the Image.
+               y stands for the height of the Image.
+
+                Pixels of the Image are stored in a lenear way. X and y selects the position of the pixel 
+                and place the pixel on the desired position of the Image.
+             */
+            foreach (var pixel in listOfPixels)
             {
-                if (x % widthOfImage == 0 && x != 0)
+                if (y % bitmap.Height == 0 && y != 0)
                 {
-                    if (y % heightOfImage == 0 && y != 0)
+                    if (x % bitmap.Width == 0 && x != 0)
                     {
                         break;
                     }
 
-                    x = 0;
-                    y++;
+                    y = 0;
+                    x++;
                 }
-                bitmap.SetPixel(x, y, pixel.Value);
-                x++;
+
+                bitmap.SetPixel(x, y, pixel);
+                y++;
             }
 
 
+            //Following 'using' block takes the bitmap and returns a Bitmap image. 
             using (MemoryStream memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Png);
@@ -58,7 +66,7 @@ namespace RandomPixelSortApp
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
                 return bitmapImage;
-            }            
-        }       
+            }
+        }
     }
 }

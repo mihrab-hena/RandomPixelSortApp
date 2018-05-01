@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RandomPixelSortApp
 {
-    class PixelHandler
+    public class PixelHandler
     {
         //heightOfImage and widthOfImage should be in pixels
         public const int heightOfImage = 300;
@@ -26,10 +26,10 @@ namespace RandomPixelSortApp
         /// <summary>
         /// Generates pixels with random argb values for a given height and width
         /// </summary>        
-        public Dictionary<int, Color> GenerateRandomPixels()
+        public List<Color> GenerateRandomPixels()
         {
             Random rand = new Random();
-            Dictionary<int, Color> dictionaryRandomPixels = new Dictionary<int, Color>();
+            List<Color> listOfPixels = new List<Color>();
 
             int totalNumberOfPixels = heightOfImage * widthOfImage;
             int a = 0;
@@ -43,24 +43,25 @@ namespace RandomPixelSortApp
                 r = rand.Next(256);
                 g = rand.Next(256);
                 b = rand.Next(256);
-                dictionaryRandomPixels.Add(index, Color.FromArgb(a, r, g, b));
+                listOfPixels.Add(Color.FromArgb(a, r, g, b));
             }
 
-            return dictionaryRandomPixels;
+            return listOfPixels;
         }
+        
 
         /// <summary>
         /// Sort the given pixels with an asending order of HUE value
         /// </summary>
-        /// <param name="dictionaryPixels"></param>        
-        public Dictionary<int, Color> SortPixelsByHue(Dictionary<int, Color> dictionaryPixels)
+        /// <param name="listOfPixels"></param>
+        /// <returns></returns>
+        public List<Color> SortPixelsByHue(List<Color> listOfPixels)
         {
-            var sortedPixels = from pair in dictionaryPixels
-                orderby pair.Value.GetHue() ascending
+            var sortedPixels = from pair in listOfPixels
+                orderby pair.GetHue() ascending
                 select pair;
 
-            return sortedPixels.ToDictionary(p => p.Key, p => p.Value);
+            return sortedPixels.ToList();
         }
-
     }
 }

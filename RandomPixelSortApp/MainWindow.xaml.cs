@@ -22,9 +22,9 @@ namespace RandomPixelSortApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        PixelHandler pixelHandler = new PixelHandler();
-        Dictionary<int, Color> dictionaryRandomPixels = new Dictionary<int, Color>();
-        Dictionary<int, Color> dictionarySortedPixelsByHue = new Dictionary<int, Color>();
+        PixelHandler pixelHandler = new PixelHandler();        
+        List<Color> listOfRandomPixels = new List<Color>();        
+        List<Color> listOfSortedPixelsByHue = new List<Color>();
 
         public MainWindow()
         {
@@ -32,18 +32,17 @@ namespace RandomPixelSortApp
         }
 
         private void RandomColorButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            dictionaryRandomPixels = pixelHandler.GenerateRandomPixels();
-            ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
-            this.ImageViewer.Source = imageHandler.MakeImage(dictionaryRandomPixels);
+        {                        
+            listOfRandomPixels = pixelHandler.GenerateRandomPixels();
+            ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);                        
+            ImageViewer.Source = imageHandler.MakeImage(listOfRandomPixels);
         }
 
         private void ColorSortingButton_Click(object sender, RoutedEventArgs e)
-        {
-            dictionarySortedPixelsByHue = pixelHandler.SortPixelsByHue(dictionaryRandomPixels);
+        {            
+            listOfSortedPixelsByHue = pixelHandler.SortPixelsByHue(listOfRandomPixels);
             ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
-            this.ImageViewer.Source = imageHandler.MakeImage(dictionarySortedPixelsByHue);
+            this.ImageViewer.Source = imageHandler.MakeImage(listOfSortedPixelsByHue);
         }
     }
 }
