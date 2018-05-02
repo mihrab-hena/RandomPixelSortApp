@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace RandomPixelSortApp
 {
-    class ImageHandler
+    public class ImageHandler
     {
         private int heightOfImage;
         private int widthOfImage;
@@ -25,7 +25,7 @@ namespace RandomPixelSortApp
         /// Fills the area of Image with given pixels for predefined height and width of the Image
         /// </summary>
         /// <param name="listOfPixels"></param>        
-        public BitmapImage MakeImage(List<Color> listOfPixels)
+        public Bitmap MakeBitmapOfImage(List<Color> listOfPixels)
         {
             int x = 0;
             int y = 0;
@@ -54,7 +54,12 @@ namespace RandomPixelSortApp
                 y++;
             }
 
+            return bitmap;
+            //return ConvertToBitmapImage(bitmap);
+        }
 
+        public BitmapImage ConvertToBitmapImage(Bitmap bitmap)
+        {
             //Following 'using' block takes the bitmap and returns a Bitmap image. 
             using (MemoryStream memory = new MemoryStream())
             {

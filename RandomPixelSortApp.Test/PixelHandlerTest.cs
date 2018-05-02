@@ -9,7 +9,25 @@ namespace RandomPixelSortApp.Test
     public class PixelHandlerTest
     {
         [TestMethod]
-        public void SortPixelsByHue_SortPixelsInAscendingOrder()
+        public void GenerateRandomPixels_ShouldGeneratePixles_ListOfPixelsWithCertainLength()
+        {
+            //Arrange
+            PixelHandler pixelHandler = new PixelHandler();
+            int heightOfImage = pixelHandler.HeightOfImage;
+            int widthOfImage = pixelHandler.WidthOfImage;
+            int totalLength = heightOfImage * widthOfImage;
+            List<Color> listOfRandomPixels = new List<Color>();
+
+            //Act
+            listOfRandomPixels = pixelHandler.GenerateRandomPixels();
+
+            //Assert
+            Assert.AreEqual(totalLength, listOfRandomPixels.Count);
+
+        }
+
+        [TestMethod]
+        public void SortPixelsByHue_SortPixelsInAscendingOrder_SortedPixels()
         {
             //Arrange
             List<Color> listOfPixelsToBeSorted = new List<Color>();
@@ -48,5 +66,7 @@ namespace RandomPixelSortApp.Test
             CollectionAssert.AreEqual(listOfPixelsExpected, listOfPixelsActual);
             
         }
+
+        
     }
 }

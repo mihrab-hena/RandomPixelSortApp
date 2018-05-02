@@ -10,9 +10,9 @@ namespace RandomPixelSortApp
 {
     public class PixelHandler
     {
-        //heightOfImage and widthOfImage should be in pixels        
-        public readonly int heightOfImage = Int32.Parse(ConfigurationManager.AppSettings["ImageHeight"]);         
-        public readonly int widthOfImage = Int32.Parse(ConfigurationManager.AppSettings["ImageWidth"]);
+        //heightOfImage and widthOfImage should be in pixels                
+        public readonly int heightOfImage = 300;
+        public readonly int widthOfImage = 400;
 
         public int HeightOfImage
         {
@@ -58,9 +58,9 @@ namespace RandomPixelSortApp
         /// <returns></returns>
         public List<Color> SortPixelsByHue(List<Color> listOfPixels)
         {
-            var sortedPixels = from pair in listOfPixels
-                orderby pair.GetHue() ascending
-                select pair;
+            var sortedPixels = from pixel in listOfPixels
+                orderby pixel.GetHue() ascending
+                select pixel;
 
             return sortedPixels.ToList();
         }

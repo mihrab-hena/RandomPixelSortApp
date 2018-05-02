@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -37,7 +38,8 @@ namespace RandomPixelSortApp
             {
                 listOfRandomPixels = pixelHandler.GenerateRandomPixels();
                 ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
-                ImageViewer.Source = imageHandler.MakeImage(listOfRandomPixels);
+                Bitmap bitmapOfImage = imageHandler.MakeBitmapOfImage(listOfRandomPixels);
+                ImageViewer.Source = imageHandler.ConvertToBitmapImage(bitmapOfImage);
             }
             catch (ArgumentException argumentException)
             {
@@ -46,7 +48,7 @@ namespace RandomPixelSortApp
             }
             catch (Exception exceptionObj)
             {
-                Console.WriteLine("Error Occured. \n Details:" + exceptionObj.Message);
+                MessageBox.Show("Error Occured. \n Details:" + exceptionObj.Message);
             }
       
         }
@@ -57,11 +59,12 @@ namespace RandomPixelSortApp
             {
                 listOfSortedPixelsByHue = pixelHandler.SortPixelsByHue(listOfRandomPixels);
                 ImageHandler imageHandler = new ImageHandler(pixelHandler.HeightOfImage, pixelHandler.WidthOfImage);
-                ImageViewer.Source = imageHandler.MakeImage(listOfSortedPixelsByHue);
+                Bitmap bitmapOfImage = imageHandler.MakeBitmapOfImage(listOfSortedPixelsByHue);
+                ImageViewer.Source = imageHandler.ConvertToBitmapImage(bitmapOfImage);
             }
             catch (Exception exceptionObj)
             {
-                Console.WriteLine("Error Occured. \n Details:" + exceptionObj.Message);
+                MessageBox.Show("Error Occured. \n Details:" + exceptionObj.Message);
             }            
         }
     }
